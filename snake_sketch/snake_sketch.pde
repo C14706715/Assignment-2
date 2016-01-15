@@ -1,5 +1,6 @@
 //Classes
-Snake test;
+Snake snake;
+Block block;
 
 //Arrays
 color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), color(0, 87, 229)};
@@ -7,83 +8,92 @@ color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), co
 //Global Variables
 int numFrames=100;
 
+
 void setup()
 {
   size(400, 500);
-  test= new Snake();
+  snake= new Snake();
 }
+
 
 void keyPressed()
 {
+  //CODED checks if any special keys are detected i.e. up, down, left, right
   if(key==CODED)
   {
     if(keyCode==LEFT)
     {
-      test.direction="left";
+      snake.direction="LEFT";
     }
     else if(keyCode==RIGHT)
     {
-      test.direction="right";
+      snake.direction="RIGHT";
     }
     else if(keyCode==UP)
     {
-      test.direction="up";
+      snake.direction="UP";
     }
     else
     {
-      test.direction="down";
+      snake.direction="DOWN";
     }
   }
 }
 
 
-
-  void movement()
+void movement()
+{
+  for(int i=snake.Snakelength-1; i>0; i=i-1)
   {
-    for(int i=test.Snakelength-1; i>0; i=i-1)
-    {
-      test.xposition.set(i, test.xposition.get(i-1));
-      test.yposition.set(i, test.yposition.get(i-1));
-    }
-  
-    if(test.direction=="Left")
-    {
-      test.xposition.set(0, test.xposition.get(0)-test.sidelength);
-    }
-    else if(test.direction=="right")
-    {
-      test.xposition.set(0, test.xposition.get(0)+test.sidelength);
-    }
-    else if (test.direction=="Up")
-    {
-      test.yposition.set(0, test.yposition.get(0)+test.sidelength);
-    }
-    else
-    {
-      test.yposition.set(0, test.yposition.get(0)-test.sidelength);
-    }
-  
-    test.xposition.set(0, (test.xposition.get(0)+width) % width);
-    test.yposition.set(0, (test.yposition.get(0)+height) % height);
-  }   
-  
-  void display()
-  {
-    for(int i=0; i<test.Snakelength; i++)
-    {
-      stroke(179, 140, 198);
-      fill(100, 0, 100, map(i-1, 0, test.Snakelength-1, 250, 50));
-      rect(test.xposition.get(i), test.yposition.get(i), test.sidelength, test.sidelength);
-    }
+    snake.xposition.set(i, snake.xposition.get(i-1));
+    snake.yposition.set(i, snake.yposition.get(i-1));
   }
   
+  if(snake.direction=="LEFT")
+  {
+    snake.xposition.set(0, snake.xposition.get(0)-snake.sidelength);
+  }
+  else if(snake.direction=="RIGHT")
+  {
+    snake.xposition.set(0, snake.xposition.get(0)+snake.sidelength);
+  }
+  else if (snake.direction=="UP")
+  {
+    snake.yposition.set(0, snake.yposition.get(0)+snake.sidelength);
+  }
+  else if(snake.direction=="DOWN")
+  {
+    snake.yposition.set(0, snake.yposition.get(0)-snake.sidelength);
+  }
+  
+  //sets the new x and y position to the width
+  snake.xposition.set(0, (snake.xposition.get(0)+width) % width);
+  snake.yposition.set(0, (snake.yposition.get(0)+height) % height);
+}   
+  
+void SnakeDisplay()
+{
+  for(int i=0; i<snake.Snakelength; i++)
+  {
+    stroke(179, 140, 198);
+    //??????
+    fill(100, 0, 100, map(i-1, 0, snake.Snakelength-1, 250, 50));
+    rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+  }
+}
 
+void BlockDisplay()
+{
+  fill(255,0, 0);
+  rect(block.xposition, block.yposition, 10, 10);
+}
+ 
 
 void BackgroundColour()
 {
   //Variables
   float time=float(frameCount % numFrames)/ numFrames;
-  //this function uses two colours. It blends from one colour to another in the time alloted
+  //lerpColor function uses two colours. It blends from one colour to another in the time alloted
   color Lcolour= lerpColor(Bcolours[0], Bcolours[2], time);
   color Rcolour= lerpColor(Bcolours[1], Bcolours[3], time);
 
@@ -96,10 +106,11 @@ void BackgroundColour()
   }
 }
 
+
 void draw()
 {
   BackgroundColour();
   movement();
-  display();
-
+  SnakeDisplay();
+  BlockDisplay();
 }
