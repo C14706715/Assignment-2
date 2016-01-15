@@ -13,15 +13,6 @@ void setup()
   test= new Snake();
 }
 
-void draw()
-{
-  background(255,255, 255);
- // BackgroundColour();
-  test.movement();
-  test.display();
-
-}
-
 void keyPressed()
 {
   if(key==CODED)
@@ -46,69 +37,53 @@ void keyPressed()
 }
 
 
-class Snake
-{
-  int Slength;
-  float sidelength;
-  String direction;
-  ArrayList <Float> xposition, yposition;
-  
-  Snake()
-  {
-    Slength=1;
-    sidelength=17;
-    direction="Right";
-    xposition= new ArrayList();
-    yposition = new ArrayList();
-    xposition.add(random(width));
-    yposition.add(random(height));
-  }
 
   void movement()
   {
-    for(int i=Slength-1; i>0; i=i-1)
+    for(int i=test.Snakelength-1; i>0; i=i-1)
     {
-      xposition.set(i, xposition.get(i-1));
-      yposition.set(i, yposition.get(i-1));
+      test.xposition.set(i, test.xposition.get(i-1));
+      test.yposition.set(i, test.yposition.get(i-1));
     }
   
-    if(direction=="Left")
+    if(test.direction=="Left")
     {
-      xposition.set(0, xposition.get(0)-sidelength);
+      test.xposition.set(0, test.xposition.get(0)-test.sidelength);
     }
-    else if(direction=="right")
+    else if(test.direction=="right")
     {
-      xposition.set(0, xposition.get(0)+sidelength);
+      test.xposition.set(0, test.xposition.get(0)+test.sidelength);
     }
-    else if (direction=="Up")
+    else if (test.direction=="Up")
     {
-      yposition.set(0, yposition.get(0)+sidelength);
+      test.yposition.set(0, test.yposition.get(0)+test.sidelength);
     }
     else
     {
-      yposition.set(0, yposition.get(0)-sidelength);
+      test.yposition.set(0, test.yposition.get(0)-test.sidelength);
     }
   
-    xposition.set(0, (xposition.get(0)+width) % width);
-    yposition.set(0, (yposition.get(0)+height) % height);
+    test.xposition.set(0, (test.xposition.get(0)+width) % width);
+    test.yposition.set(0, (test.yposition.get(0)+height) % height);
   }   
   
   void display()
   {
-    for(int i=0; i<Slength; i++)
+    for(int i=0; i<test.Snakelength; i++)
     {
       stroke(179, 140, 198);
-      fill(100, 0, 100, map(i-1, 0, Slength-1, 250, 50));
-      rect(xposition.get(i), yposition.get(i), sidelength, sidelength);
+      fill(100, 0, 100, map(i-1, 0, test.Snakelength-1, 250, 50));
+      rect(test.xposition.get(i), test.yposition.get(i), test.sidelength, test.sidelength);
     }
   }
   
-}
+
 
 void BackgroundColour()
 {
   //Variables
   float time=float(frameCount % numFrames)/ numFrames;
+  //this function uses two colours. It blends from one colour to another in the time alloted
   color Lcolour= lerpColor(Bcolours[0], Bcolours[2], time);
   color Rcolour= lerpColor(Bcolours[1], Bcolours[3], time);
 
@@ -121,4 +96,10 @@ void BackgroundColour()
   }
 }
 
- 
+void draw()
+{
+  BackgroundColour();
+  movement();
+  display();
+
+}
