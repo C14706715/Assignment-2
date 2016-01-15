@@ -12,7 +12,9 @@ int numFrames=100;
 void setup()
 {
   size(400, 500);
-  snake= new Snake();
+  snake = new Snake();
+  block = new Block();
+  frameRate(20);
 }
 
 
@@ -75,17 +77,32 @@ void SnakeDisplay()
 {
   for(int i=0; i<snake.Snakelength; i++)
   {
-    stroke(179, 140, 198);
+    stroke(255, 125, 0);
     //??????
-    fill(100, 0, 100, map(i-1, 0, snake.Snakelength-1, 250, 50));
+    fill(255, 125, 0/*, map(i-1, 0, snake.Snakelength-1, 250, 50)*/);    //possibly map method????
     rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
   }
 }
 
+void ExtraBlock()
+{
+  snake.xposition.add(snake.xposition.get(snake.Snakelength-1)+snake.sidelength);
+  snake.yposition.add(snake.yposition.get(snake.Snakelength-1)+snake.sidelength);
+  snake.Snakelength++;
+}
+
+
 void BlockDisplay()
 {
-  fill(255,0, 0);
-  rect(block.xposition, block.yposition, 10, 10);
+  stroke(255, 37, 37);
+  fill(255, 37, 37);
+  rect(block.xposition, block.yposition, snake.sidelength, snake.sidelength);
+}
+
+void BlockRestart()
+{
+  block.xposition= random(100, width-100);
+  block.yposition= random(100, height-100);
 }
  
 
@@ -113,4 +130,15 @@ void draw()
   movement();
   SnakeDisplay();
   BlockDisplay();
+  for(int i=0; i<snake.Snakelength; i++)
+  {
+    //dist() measure the distance between the point(x1, y1, x2, y2)
+    float Distance=dist(block.xposition, block.yposition, snake.xposition.get(i), snake.yposition.get(i));
+ 
+    if(Distance<snake.sidelength)
+    {
+      BlockRestart();
+      ExtraBlock();
+    }
+  }
 }
