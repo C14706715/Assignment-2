@@ -4,6 +4,7 @@ class Snake
   float sidelength;
   String direction;
   ArrayList <Float>  xposition, yposition;
+  int counter;
   
   Snake()
   {
@@ -13,7 +14,7 @@ class Snake
     xposition= new ArrayList();
     yposition = new ArrayList();
     xposition.add(random(width));
-    yposition.add(random(height));
-    
+    yposition.add(random(height)); 
+    counter=0;
   }
 }

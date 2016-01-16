@@ -76,7 +76,7 @@ void movement()
   snake.xposition.set(0, (snake.xposition.get(0)+width) % width);
   snake.yposition.set(0, (snake.yposition.get(0)+height) % height);
   
-  if(HitTail()==false)
+  if(HitTail()==true)
   {
     snake.Snakelength=1;
     
@@ -99,12 +99,13 @@ void SnakeDisplay()
     stroke(255, 125, 0);
     //??????
     fill(255, 125, 0/*, map(i-1, 0, snake.Snakelength-1, 250, 50)*/);    //possibly map method????
+    ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+      fill(255, 125, 50);
     rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+   fill(255, 125, 100);
+    ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
   }
 }
-
-    
-
 
 
 void ExtraBlock()
@@ -119,7 +120,14 @@ void BlockDisplay()
 {
   stroke(255, 37, 37);
   fill(255, 37, 37);
-  rect(block.xposition, block.yposition, snake.sidelength, snake.sidelength);
+  
+  ellipse(block.xposition, block.yposition, snake.sidelength, snake.sidelength);
+  stroke(34,65,76);
+  ellipse(block.xposition-3, block.yposition-3, 3, 3);
+  ellipse(block.xposition+4, block.yposition-4, 3, 3);
+  line(block.xposition-5, block.yposition+5, block.xposition+5, block.yposition+5);
+  line(block.xposition-5, block.yposition+5, block.xposition-7, block.yposition+3);
+  line(block.xposition+5, block.yposition+5, block.xposition+7, block.yposition+3);
 }
 
 
@@ -128,9 +136,6 @@ void BlockRestart()
   block.xposition= random(100, width-100);
   block.yposition= random(100, height-100);
 }
- 
-
-
 
       
 void BackgroundColour()
@@ -160,10 +165,10 @@ void draw()
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
-    float Distance=dist(block.xposition, block.yposition, snake.xposition.get(i), snake.yposition.get(i));
  
-    if(Distance<snake.sidelength)
+    if(dist(block.xposition, block.yposition, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
     {
+      snake.counter++;
       BlockRestart();
       ExtraBlock();
     }
@@ -176,7 +181,7 @@ boolean HitTail()
   {
     if(dist(snake.xposition.get(0), snake.yposition.get(0), snake.xposition.get(i), snake.yposition.get(i)) < snake.sidelength)
     {
-       return true;
+       return false;
     }
   }
   return false; 
