@@ -14,5 +14,6 @@ class Snake
     yposition = new ArrayList();
     xposition.add(random(width));
     yposition.add(random(height));
+    
   }
 }

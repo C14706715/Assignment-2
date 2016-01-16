@@ -1,9 +1,13 @@
+//Jake Young
+
 //Classes
 Snake snake;
 Block block;
 
+
 //Arrays
 color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), color(0, 87, 229)};
+
 
 //Global Variables
 int numFrames=100;
@@ -14,7 +18,7 @@ void setup()
   size(400, 500);
   snake = new Snake();
   block = new Block();
-  frameRate(20);
+  frameRate(10);
 }
 
 
@@ -61,17 +65,32 @@ void movement()
   }
   else if (snake.direction=="UP")
   {
-    snake.yposition.set(0, snake.yposition.get(0)+snake.sidelength);
+    snake.yposition.set(0, snake.yposition.get(0)-snake.sidelength);
   }
   else if(snake.direction=="DOWN")
   {
-    snake.yposition.set(0, snake.yposition.get(0)-snake.sidelength);
+    snake.yposition.set(0, snake.yposition.get(0)+snake.sidelength);
   }
   
   //sets the new x and y position to the width
   snake.xposition.set(0, (snake.xposition.get(0)+width) % width);
   snake.yposition.set(0, (snake.yposition.get(0)+height) % height);
-}   
+  
+  if(HitTail()==false)
+  {
+    snake.Snakelength=1;
+    
+    //place xpos and ypos in temp variable
+    float X=snake.xposition.get(0);
+    float Y=snake.yposition.get(0);
+    
+    snake.xposition.clear();
+    snake.yposition.clear();
+    
+    snake.xposition.add(X);
+    snake.yposition.add(Y);
+  }
+}
   
 void SnakeDisplay()
 {
@@ -83,6 +102,10 @@ void SnakeDisplay()
     rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
   }
 }
+
+    
+
+
 
 void ExtraBlock()
 {
@@ -99,6 +122,7 @@ void BlockDisplay()
   rect(block.xposition, block.yposition, snake.sidelength, snake.sidelength);
 }
 
+
 void BlockRestart()
 {
   block.xposition= random(100, width-100);
@@ -106,6 +130,9 @@ void BlockRestart()
 }
  
 
+
+
+      
 void BackgroundColour()
 {
   //Variables
@@ -141,4 +168,16 @@ void draw()
       ExtraBlock();
     }
   }
+}
+
+boolean HitTail()
+{ 
+  for(int i=0; i<snake.Snakelength; i++)
+  {
+    if(dist(snake.xposition.get(0), snake.yposition.get(0), snake.xposition.get(i), snake.yposition.get(i)) < snake.sidelength)
+    {
+       return true;
+    }
+  }
+  return false; 
 }
