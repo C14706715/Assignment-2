@@ -113,6 +113,7 @@ void ExtraBlock()
   snake.xposition.add(snake.xposition.get(snake.Snakelength-1)+snake.sidelength);
   snake.yposition.add(snake.yposition.get(snake.Snakelength-1)+snake.sidelength);
   snake.Snakelength++;
+  block.counter++;
 }
 
 
@@ -173,6 +174,22 @@ void draw()
       ExtraBlock();
     }
   }
+  
+  if(block.counter%10==0)
+  {
+      for(int i=0; i<snake.Snakelength; i++)
+  {
+    stroke(155, 225, 10);
+    //??????
+    fill(255, 125, 0/*, map(i-1, 0, snake.Snakelength-1, 250, 50)*/);    //possibly map method????
+    ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+      fill(55, 25, 50);
+    rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+   fill(155, 225, 100);
+    ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+  }
+  }
+  
 }
 
 boolean HitTail()
