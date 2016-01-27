@@ -81,6 +81,7 @@ void movement()
     snake.Snakelength=1;
     
     //place xpos and ypos in temp variable
+    
     float X=snake.xposition.get(0);
     float Y=snake.yposition.get(0);
     
@@ -114,6 +115,22 @@ void ExtraBlock()
   snake.yposition.add(snake.yposition.get(snake.Snakelength-1)+snake.sidelength);
   snake.Snakelength++;
   block.counter++;
+  
+  //this changes the colour of the snake once the snake has ten blocks
+  if(block.counter%10==0)
+  {
+      for(int i=0; i<snake.Snakelength; i++)
+      {
+        stroke(155, 225, 10);
+        //??????
+        fill(255, 125, 0/*, map(i-1, 0, snake.Snakelength-1, 250, 50)*/);    //possibly map method????
+        ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+        fill(55, 25, 50);
+        rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+        fill(155, 225, 100);
+        ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+      }
+   }
 }
 
 
@@ -173,32 +190,16 @@ void draw()
       BlockRestart();
       ExtraBlock();
     }
-  }
-  
-  if(block.counter%10==0)
-  {
-      for(int i=0; i<snake.Snakelength; i++)
-  {
-    stroke(155, 225, 10);
-    //??????
-    fill(255, 125, 0/*, map(i-1, 0, snake.Snakelength-1, 250, 50)*/);    //possibly map method????
-    ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-      fill(55, 25, 50);
-    rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-   fill(155, 225, 100);
-    ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-  }
-  }
-  
+  }  
 }
 
 boolean HitTail()
 { 
-  for(int i=0; i<snake.Snakelength; i++)
+  for(int i=1; i<snake.Snakelength; i++)
   {
     if(dist(snake.xposition.get(0), snake.yposition.get(0), snake.xposition.get(i), snake.yposition.get(i)) < snake.sidelength)
     {
-       return false;
+       return true;
     }
   }
   return false; 
