@@ -86,7 +86,6 @@ void Movement()
     snake.Snakelength=1;
     
     //place xpos and ypos in temp variable
-    
     float X=snake.xposition.get(0);
     float Y=snake.yposition.get(0);
     
@@ -95,37 +94,13 @@ void Movement()
     
     snake.xposition.add(X);
     snake.yposition.add(Y);
+    
+    snake.counter=0;
   }
   
 }
 
   
-void Score()
-{
-  if(snake.counter>snake.highScore)
-  {
-    snake.highScore=snake.counter;
-  }
-  
-  fill(250, 0, 250);
-  textSize(65);
-  text("Snake Game", width/2, 80);
-  fill(250, 0, 250);
-  textSize(20);
-  text("By: Jake Young", width/2, 140);
-  
-  stroke(179, 140, 198);
-  fill(255, 0, 255);
-  rect(90, 70, 160, 80);
-  fill(118, 22, 167);
-  textSize(17);
-  text("Score: "+ snake.counter, 70, 50);
-  
-  fill(118, 22, 167);
-  textSize(17);
-  text("High Score: ", +snake.highScore, 70, 70);
-  
-}
 
 void SnakeDisplay()
 {
@@ -222,7 +197,17 @@ void BackgroundColour()
     line(i, 0, i, height);
   }
 }
-
+void Score()
+{
+  int highscore=0;
+ 
+  if(highscore<snake.counter)
+  {
+    highscore=snake.counter;
+  }
+  text("Score " +snake.counter, 10, 470);
+  text("Highscore "+highscore, 10, 490);
+}
 
 void draw()
 {
@@ -233,13 +218,12 @@ void draw()
   BlockDisplay();
   KillerDisplay();
   Score();
-  
+
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
     if(dist(block.position.x, block.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
     {
-      snake.counter++;
       BlockRestart();
       ExtraBlock();
     }
