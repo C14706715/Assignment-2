@@ -3,6 +3,7 @@
 //Rollercoaster game (snake game inspired)
 
 
+import java.util.Scanner;
 //Classes
 Snake snake;
 Block block;
@@ -101,18 +102,24 @@ void Movement()
 }
 
   
-
 void SnakeDisplay()
 {
   for(int i=0; i<snake.Snakelength; i++)
   {
     stroke(255, 125, 0);
     fill(255, 125, 0); 
-    ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+   // ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
     fill(255, 125, 50);
     rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
     fill(255, 125, 100);
     ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+    
+    stroke(0);
+    ellipse(snake.xposition.get(i)-3,snake.yposition.get(i)-3, 3, 3);
+    ellipse(snake.xposition.get(i)+4, snake.yposition.get(i)-4, 3, 3);
+    line(snake.xposition.get(i)-5, snake.yposition.get(i)+5, snake.xposition.get(i)+5, snake.yposition.get(i)+5);
+    line(snake.xposition.get(i)-5, snake.yposition.get(i)+5, snake.xposition.get(i)-7, snake.yposition.get(i)+3);
+    line(snake.xposition.get(i)+5, snake.yposition.get(i)+5, snake.xposition.get(i)+7, snake.yposition.get(i)+3);
   }
 }
 
@@ -126,9 +133,7 @@ void BlockDisplay()
   stroke(34,65,76);
   ellipse(block.position.x-3, block.position.y-3, 3, 3);
   ellipse(block.position.x+4, block.position.y-4, 3, 3);
-  line(block.position.x-5, block.position.y+5, block.position.x+5, block.position.y+5);
-  line(block.position.x-5, block.position.y+5, block.position.x-7, block.position.y+3);
-  line(block.position.x+5, block.position.y+5, block.position.x+7, block.position.y+3);
+  ellipse(block.position.x+0, block.position.y+5, 10, 6);
 }
 
 
@@ -197,6 +202,8 @@ void BackgroundColour()
     line(i, 0, i, height);
   }
 }
+
+
 void Score()
 {
   int highscore=0;
@@ -209,9 +216,9 @@ void Score()
   text("Highscore "+highscore, 10, 490);
 }
 
+
 void draw()
 {
-  
   BackgroundColour();
   Movement();
   SnakeDisplay();
