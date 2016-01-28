@@ -2,6 +2,7 @@
 //Assignment 2
 //Rollercoaster game (snake game inspired)
 
+
 //Classes
 Snake snake;
 Block block;
@@ -13,7 +14,7 @@ color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), co
 
 //Global Variables
 int numFrames=100;
-
+PVector circle;
 
 void setup()
 {
@@ -21,6 +22,13 @@ void setup()
   snake = new Snake();
   block = new Block();
   frameRate(10);
+  //PVector used for snake killer function
+  circle=new PVector(10, 12);
+}
+
+void killer()
+{
+  ellipse(circle.x, circle.y, 15, 15);
 }
 
 
@@ -94,6 +102,7 @@ void movement()
     snake.yposition.add(Y);
   }
 }
+
   
 void SnakeDisplay()
 {
@@ -102,9 +111,9 @@ void SnakeDisplay()
     stroke(255, 125, 0);
     fill(255, 125, 0); 
     ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-      fill(255, 125, 50);
+    fill(255, 125, 50);
     rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-   fill(255, 125, 100);
+    fill(255, 125, 100);
     ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
   }
 }
@@ -182,6 +191,7 @@ void draw()
   movement();
   SnakeDisplay();
   BlockDisplay();
+  killer();
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
@@ -193,6 +203,7 @@ void draw()
     }
   }  
 }
+
 
 //Boolean used to check if tail is hit, also if user reverses the snake which is invalid
 boolean HitTail()
