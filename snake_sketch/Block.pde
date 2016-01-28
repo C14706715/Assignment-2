@@ -2,12 +2,10 @@ class Block
 {
   PVector position;   
   float Size;
-  int counter;
   
   Block()
   {
     position=new PVector(random(100, width-100), random(100, width-100));
     Size=10;
-    counter=1;
   }
 }

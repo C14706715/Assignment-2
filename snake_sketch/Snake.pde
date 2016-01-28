@@ -5,6 +5,7 @@ class Snake
   String direction;
   ArrayList <Float>  xposition, yposition;
   int counter;
+  int highScore;
   
   Snake()
   {
@@ -16,5 +17,6 @@ class Snake
     xposition.add(random(width));
     yposition.add(random(height)); 
     counter=0;
+    highScore=0;
   }
 }
