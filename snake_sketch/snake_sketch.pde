@@ -27,22 +27,6 @@ void setup()
 }
 
 
-void killer()
-{
-  ellipse(killer.circle.x, killer.circle.y, 15, 15);
-}
-
-void killerRestart()
-{
-   for(int i=0; i<snake.Snakelength; i++)
-  {
-  if(dist(50, 60, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
-  {
-      ellipse(killer.circle.x, killer.circle.y, 15, 15);
-  }
-  }
-}
-
 void keyPressed()
 {
   //CODED checks if any special keys are detected i.e. up, down, left, right
@@ -130,6 +114,27 @@ void SnakeDisplay()
 }
 
 
+void BlockDisplay()
+{
+  stroke(255, 37, 37);
+  fill(255, 37, 37);
+  
+  ellipse(block.position.x, block.position.y, snake.sidelength, snake.sidelength);
+  stroke(34,65,76);
+  ellipse(block.position.x-3, block.position.y-3, 3, 3);
+  ellipse(block.position.x+4, block.position.y-4, 3, 3);
+  line(block.position.x-5, block.position.y+5, block.position.x+5, block.position.y+5);
+  line(block.position.x-5, block.position.y+5, block.position.x-7, block.position.y+3);
+  line(block.position.x+5, block.position.y+5, block.position.x+7, block.position.y+3);
+}
+
+
+void KillerDisplay()
+{
+  ellipse(killer.position.x, killer.position.y, 15, 15);
+}
+
+
 void ExtraBlock()
 {
   snake.xposition.add(snake.xposition.get(snake.Snakelength-1)+snake.sidelength);
@@ -155,25 +160,17 @@ void ExtraBlock()
 }
 
 
-void BlockDisplay()
-{
-  stroke(255, 37, 37);
-  fill(255, 37, 37);
-  
-  ellipse(block.position.x, block.position.y, snake.sidelength, snake.sidelength);
-  stroke(34,65,76);
-  ellipse(block.position.x-3, block.position.y-3, 3, 3);
-  ellipse(block.position.x+4, block.position.y-4, 3, 3);
-  line(block.position.x-5, block.position.y+5, block.position.x+5, block.position.y+5);
-  line(block.position.x-5, block.position.y+5, block.position.x-7, block.position.y+3);
-  line(block.position.x+5, block.position.y+5, block.position.x+7, block.position.y+3);
-}
-
-
 void BlockRestart()
 {
   block.position.x= random(100, width-100);
   block.position.y= random(100, height-100);
+}
+
+
+void KillerRestart()
+{
+  killer.position.x= random(0, width);
+  killer.position.y= random(0, height);      
 }
 
       
@@ -202,7 +199,8 @@ void draw()
   movement();
   SnakeDisplay();
   BlockDisplay();
-  killer();
+  KillerDisplay();
+  
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
@@ -211,6 +209,17 @@ void draw()
       snake.counter++;
       BlockRestart();
       ExtraBlock();
+    }
+  } 
+    
+  for(int i=0; i<snake.Snakelength; i++)
+  {
+    //dist() measure the distance between the point(x1, y1, x2, y2)
+    if(dist(block.position.x, block.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
+    {
+      snake.counter++;
+      KillerRestart();
+      ExtraKiller();
     }
   }  
 }

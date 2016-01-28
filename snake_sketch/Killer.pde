@@ -1,6 +1,6 @@
 class Killer
 {
-  PVector circle;
+  PVector position;
   
   Killer()
   {
