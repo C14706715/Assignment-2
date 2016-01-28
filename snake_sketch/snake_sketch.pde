@@ -1,4 +1,6 @@
 //Jake Young
+//Assignment 2
+//Rollercoaster game (snake game inspired)
 
 //Classes
 Snake snake;
@@ -98,8 +100,7 @@ void SnakeDisplay()
   for(int i=0; i<snake.Snakelength; i++)
   {
     stroke(255, 125, 0);
-    //??????
-    fill(255, 125, 0/*, map(i-1, 0, snake.Snakelength-1, 250, 50)*/);    //possibly map method????
+    fill(255, 125, 0); 
     ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
       fill(255, 125, 50);
     rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
@@ -122,14 +123,14 @@ void ExtraBlock()
       for(int i=0; i<snake.Snakelength; i++)
       {
         stroke(155, 225, 10);
-        //??????
-        fill(255, 125, 0/*, map(i-1, 0, snake.Snakelength-1, 250, 50)*/);    //possibly map method????
+        fill(255, 125, 0);  
         ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
         fill(55, 25, 50);
         rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
         fill(155, 225, 100);
         ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
       }
+      frameRate(10+(block.counter/2));
    }
 }
 
@@ -160,6 +161,7 @@ void BackgroundColour()
 {
   //Variables
   float time=float(frameCount % numFrames)/ numFrames;
+  
   //lerpColor function uses two colours. It blends from one colour to another in the time alloted
   color Lcolour= lerpColor(Bcolours[0], Bcolours[2], time);
   color Rcolour= lerpColor(Bcolours[1], Bcolours[3], time);
@@ -183,7 +185,6 @@ void draw()
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
- 
     if(dist(block.xposition, block.yposition, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
     {
       snake.counter++;
@@ -193,6 +194,7 @@ void draw()
   }  
 }
 
+//Boolean used to check if tail is hit, also if user reverses the snake which is invalid
 boolean HitTail()
 { 
   for(int i=1; i<snake.Snakelength; i++)
