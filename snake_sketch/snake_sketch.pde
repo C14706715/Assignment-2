@@ -6,6 +6,7 @@
 //Classes
 Snake snake;
 Block block;
+Killer killer;
 
 
 //Arrays
@@ -14,23 +15,33 @@ color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), co
 
 //Global Variables
 int numFrames=100;
-PVector circle;
+
 
 void setup()
 {
   size(400, 500);
   snake = new Snake();
   block = new Block();
+  killer = new Killer();
   frameRate(10);
-  //PVector used for snake killer function
-  circle=new PVector(10, 12);
 }
+
 
 void killer()
 {
-  ellipse(circle.x, circle.y, 15, 15);
+  ellipse(killer.circle.x, killer.circle.y, 15, 15);
 }
 
+void killerRestart()
+{
+   for(int i=0; i<snake.Snakelength; i++)
+  {
+  if(dist(50, 60, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
+  {
+      ellipse(killer.circle.x, killer.circle.y, 15, 15);
+  }
+  }
+}
 
 void keyPressed()
 {
@@ -149,20 +160,20 @@ void BlockDisplay()
   stroke(255, 37, 37);
   fill(255, 37, 37);
   
-  ellipse(block.xposition, block.yposition, snake.sidelength, snake.sidelength);
+  ellipse(block.position.x, block.position.y, snake.sidelength, snake.sidelength);
   stroke(34,65,76);
-  ellipse(block.xposition-3, block.yposition-3, 3, 3);
-  ellipse(block.xposition+4, block.yposition-4, 3, 3);
-  line(block.xposition-5, block.yposition+5, block.xposition+5, block.yposition+5);
-  line(block.xposition-5, block.yposition+5, block.xposition-7, block.yposition+3);
-  line(block.xposition+5, block.yposition+5, block.xposition+7, block.yposition+3);
+  ellipse(block.position.x-3, block.position.y-3, 3, 3);
+  ellipse(block.position.x+4, block.position.y-4, 3, 3);
+  line(block.position.x-5, block.position.y+5, block.position.x+5, block.position.y+5);
+  line(block.position.x-5, block.position.y+5, block.position.x-7, block.position.y+3);
+  line(block.position.x+5, block.position.y+5, block.position.x+7, block.position.y+3);
 }
 
 
 void BlockRestart()
 {
-  block.xposition= random(100, width-100);
-  block.yposition= random(100, height-100);
+  block.position.x= random(100, width-100);
+  block.position.y= random(100, height-100);
 }
 
       
@@ -195,7 +206,7 @@ void draw()
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
-    if(dist(block.xposition, block.yposition, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
+    if(dist(block.position.x, block.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
     {
       snake.counter++;
       BlockRestart();
