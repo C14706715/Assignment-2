@@ -3,7 +3,6 @@
 //Rollercoaster game (snake game inspired)
 
 
-import java.util.Scanner;
 //Classes
 Snake snake;
 Block block;
@@ -134,7 +133,10 @@ void BlockDisplay()
   ellipse(block.position.x-3, block.position.y-3, 3, 3);
   ellipse(block.position.x+4, block.position.y-4, 3, 3);
   ellipse(block.position.x+0, block.position.y+5, 10, 6);
-}
+  /*line(block.position.x-5, block.position.y+5, block.position.x+5, block.position.y+5);
+  line(block.position.x-5, block.position.y+5, block.position.x-7, block.position.y+3);
+  line(block.position.x+5, block.position.y+5, block.position.x+7, block.position.y+3);
+*/}
 
 
 void KillerDisplay()
