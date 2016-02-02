@@ -2,7 +2,7 @@
 
 
 
-class Star
+class KillerStar
 {
     PVector position;
     float radius;
@@ -12,7 +12,7 @@ class Star
     float lastX;
     float lastY;
     
-    Star()
+    KillerStar()
     {
       position=new PVector(random(0, width), random(0, height));
       radius=13;

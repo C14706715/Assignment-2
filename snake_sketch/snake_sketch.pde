@@ -6,8 +6,8 @@
 //Classes
 Snake snake;
 Block block;
-Killer killer;
-Star star;
+KillerStar killerStar;
+
 
 
 //Arrays
@@ -23,8 +23,8 @@ void setup()
   size(400, 500);
   snake = new Snake();
   block = new Block();
-  killer = new Killer();
-  star=new Star();
+  killerStar = new KillerStar();
+
   frameRate(10);
 }
 
@@ -138,27 +138,27 @@ void BlockDisplay()
  }
 
 
-void StarDisplay()
+void killerStarDisplay()
 {
-    for (int i = 1 ; i <= (star.edges * 2) ; i ++)
+    for (int i = 1 ; i <= (killerStar.edges * 2) ; i ++)
     {
-      float theta = i * star.thetaInc;
+      float theta = i * killerStar.thetaInc;
       float x, y;
       float rad;
       if (i % 2 == 1)
       {
-        rad = star.radius * 0.5f;
+        rad = killerStar.radius * 0.5f;
       }
       else
       {
-        rad = star.radius;        
+        rad = killerStar.radius;        
       }
 
-      x = star.position.x + sin(theta) * rad;
-      y = star.position.y -cos(theta) * rad;
-      line(star.lastX, star.lastY, x, y);
-      star.lastX = x;
-      star.lastY = y;      
+      x = killerStar.position.x + sin(theta) * rad;
+      y = killerStar.position.y -cos(theta) * rad;
+      line(killerStar.lastX, killerStar.lastY, x, y);
+      killerStar.lastX = x;
+      killerStar.lastY = y;      
     }
 }
 
@@ -196,10 +196,10 @@ void BlockRestart()
 }
 
 
-void StarRestart()
+void killerStarRestart()
 { 
-  star.position.x= random(0, width);
-  star.position.y= random(0, height);  
+  killerStar.position.x= random(0, width);
+  killerStar.position.y= random(0, height);  
   frameRate((10+(snake.counter/2))+5);
   snake.counter--;
 }
@@ -244,7 +244,7 @@ void draw()
   Movement();
   SnakeDisplay();
   BlockDisplay();
-  StarDisplay();
+  killerStarDisplay();
   Score();
 
   for(int i=0; i<snake.Snakelength; i++)
@@ -260,10 +260,10 @@ void draw()
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
-    if(dist(star.position.x, star.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
+    if(dist(killerStar.position.x, killerStar.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
     {
       //snake.counter--;
-      StarRestart();
+      killerStarRestart();
     }
   } 
 }
