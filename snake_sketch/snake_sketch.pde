@@ -135,10 +135,7 @@ void BlockDisplay()
   ellipse(block.position.x-3, block.position.y-3, 3, 3);
   ellipse(block.position.x+4, block.position.y-4, 3, 3);
   ellipse(block.position.x+0, block.position.y+5, 10, 6);
-  /*line(block.position.x-5, block.position.y+5, block.position.x+5, block.position.y+5);
-  line(block.position.x-5, block.position.y+5, block.position.x-7, block.position.y+3);
-  line(block.position.x+5, block.position.y+5, block.position.x+7, block.position.y+3);
-*/}
+ }
 
 
 void StarDisplay()
@@ -235,6 +232,7 @@ void Score()
   {
     highscore=snake.counter;
   }
+
   text("Score " +snake.counter, 10, 470);
   text("Highscore "+highscore, 10, 490);
 }
@@ -247,7 +245,6 @@ void draw()
   SnakeDisplay();
   BlockDisplay();
   StarDisplay();
-  
   Score();
 
   for(int i=0; i<snake.Snakelength; i++)
