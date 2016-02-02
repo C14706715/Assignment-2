@@ -141,10 +141,29 @@ void BlockDisplay()
 */}
 
 
-void KillerDisplay()
+void StarDisplay()
 {
-  ellipse(killer.position.x, killer.position.y, 15, 15);
-} 
+    for (int i = 1 ; i <= (star.edges * 2) ; i ++)
+    {
+      float theta = i * star.thetaInc;
+      float x, y;
+      float rad;
+      if (i % 2 == 1)
+      {
+        rad = star.radius * 0.5f;
+      }
+      else
+      {
+        rad = star.radius;        
+      }
+
+      x = star.position.x + sin(theta) * rad;
+      y = star.position.y -cos(theta) * rad;
+      line(star.lastX, star.lastY, x, y);
+      star.lastX = x;
+      star.lastY = y;      
+    }
+}
 
 
 void ExtraBlock()
@@ -180,10 +199,10 @@ void BlockRestart()
 }
 
 
-void KillerRestart()
+void StarRestart()
 { 
-  killer.position.x= random(0, width);
-  killer.position.y= random(0, height);  
+  star.position.x= random(0, width);
+  star.position.y= random(0, height);  
   frameRate((10+(snake.counter/2))+5);
   snake.counter--;
 }
@@ -227,7 +246,8 @@ void draw()
   Movement();
   SnakeDisplay();
   BlockDisplay();
-  KillerDisplay();
+  StarDisplay();
+  
   Score();
 
   for(int i=0; i<snake.Snakelength; i++)
@@ -243,10 +263,10 @@ void draw()
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
-    if(dist(killer.position.x, killer.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
+    if(dist(star.position.x, star.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
     {
-      snake.counter--;
-      KillerRestart();
+      //snake.counter--;
+      StarRestart();
     }
   } 
 }
