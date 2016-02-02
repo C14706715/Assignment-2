@@ -7,6 +7,7 @@
 Snake snake;
 Block block;
 Killer killer;
+Star star;
 
 
 //Arrays
@@ -23,6 +24,7 @@ void setup()
   snake = new Snake();
   block = new Block();
   killer = new Killer();
+  star=new Star();
   frameRate(10);
 }
 
