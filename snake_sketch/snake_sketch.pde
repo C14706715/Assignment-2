@@ -108,15 +108,13 @@ void SnakeDisplay()
 {
   for(int i=0; i<snake.Snakelength; i++)
   {
-    stroke(255, 125, 0);
-    fill(255, 125, 0); 
-   // ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
     fill(255, 125, 50);
+    stroke(255);
     rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
     fill(255, 125, 100);
     ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-    
     stroke(0);
+    fill(0);
     ellipse(snake.xposition.get(i)-3,snake.yposition.get(i)-3, 3, 3);
     ellipse(snake.xposition.get(i)+4, snake.yposition.get(i)-4, 3, 3);
     line(snake.xposition.get(i)-5, snake.yposition.get(i)+5, snake.xposition.get(i)+5, snake.yposition.get(i)+5);
@@ -126,17 +124,18 @@ void SnakeDisplay()
 }
 
 
-void BlockDisplay()
+void FaceDisplay()
 {
-  stroke(255, 37, 37);
+  stroke(0);
   fill(255, 37, 37);
-  
   ellipse(block.position.x, block.position.y, snake.sidelength, snake.sidelength);
   stroke(34,65,76);
+  fill(0, 0, 255);
   ellipse(block.position.x-3, block.position.y-3, 3, 3);
   ellipse(block.position.x+4, block.position.y-4, 3, 3);
+  fill(0);
   ellipse(block.position.x+0, block.position.y+5, 10, 6);
- }
+}
 
 
 void killerStarDisplay()
@@ -157,6 +156,7 @@ void killerStarDisplay()
 
       x = killerStar.position.x + sin(theta) * rad;
       y = killerStar.position.y -cos(theta) * rad;
+      stroke(random(0, 255), random(0, 255), random(0, 255));
       line(killerStar.lastX, killerStar.lastY, x, y);
       killerStar.lastX = x;
       killerStar.lastY = y;      
@@ -237,7 +237,7 @@ void draw()
   BackgroundColour();
   Movement();
   SnakeDisplay();
-  BlockDisplay();
+  FaceDisplay();
   killerStarDisplay();
   Score();
 
@@ -256,7 +256,6 @@ void draw()
     //dist() measure the distance between the point(x1, y1, x2, y2)
     if(dist(killerStar.position.x, killerStar.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
     {
-      //snake.counter--;
       killerStarRestart();
     }
   } 
@@ -264,7 +263,7 @@ void draw()
   //iterates highscore if the  snake is longer than the current high score 
   if(snake.Snakelength > highscore)
   {
-    highscore=snake.Snakelength;
+    highscore=snake.counter;
   }
 }
 
