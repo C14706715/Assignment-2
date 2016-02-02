@@ -16,6 +16,7 @@ color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), co
 
 //Global Variables
 int numFrames=100;
+int highscore=0;
 
 
 void setup()
@@ -226,13 +227,6 @@ void BackgroundColour()
 
 void Score()
 {
-  int highscore=0;
- 
-  if(highscore<snake.counter)
-  {
-    highscore=snake.counter;
-  }
-
   text("Score " +snake.counter, 10, 470);
   text("Highscore "+highscore, 10, 490);
 }
@@ -266,6 +260,12 @@ void draw()
       killerStarRestart();
     }
   } 
+  
+  //iterates highscore if the  snake is longer than the current high score 
+  if(snake.Snakelength > highscore)
+  {
+    highscore=snake.Snakelength;
+  }
 }
 
 
