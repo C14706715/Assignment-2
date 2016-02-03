@@ -17,6 +17,8 @@ color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), co
 //Global Variables
 int numFrames=100;
 int highscore=0;
+//allows to create a font
+PFont myFont;
 
 
 void setup()
@@ -265,6 +267,17 @@ void draw()
   {
     highscore=snake.counter;
   }
+  else 
+  {  //end game if less than zero
+  
+    highscore=0;
+  }
+  
+ if(highscore<0)
+  {
+    DrawGameOver();
+  }
+    
 }
 
 
@@ -279,4 +292,30 @@ boolean HitTail()
     }
   }
   return false; 
+}
+
+void DrawGameOver()
+{
+    background(0);
+int radius=50;
+
+  //pushMatrix() used to allow translate and rotate to take place
+  pushMatrix();
+  translate(width/2, height/2);
+  for(float i=0; i<10000; i++)
+  {
+    rotate(2);
+    translate(20, 5);
+    fill(0, random(0, 255), random(0, 255));
+    ellipse(0, i, radius, radius);
+  }
+  //popMatrix()used to contain the movements of rotate and translate
+  popMatrix();
+
+  fill(255, 0, 0);
+  myFont = createFont("Times New Roman", 70);
+  textFont(myFont);
+  textAlign(CENTER, CENTER);
+  text("Game Over \n highscore: "+highscore, width/2, height/2);
+
 }

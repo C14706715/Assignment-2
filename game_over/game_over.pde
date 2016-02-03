@@ -21,7 +21,7 @@ void draw()
 
     stroke(255, 0, 245);
     fill(0);
-  myFont = createFont("Georgia", 62);
+  myFont = createFont("Gothic", 80);
   textFont(myFont);
   textAlign(CENTER, CENTER);
   text("Game Over", width/2, height/2);
