@@ -9,7 +9,6 @@ Block block;
 KillerStar killerStar;
 
 
-
 //Arrays
 color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), color(0, 87, 229)};
 
@@ -17,17 +16,20 @@ color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), co
 //Global Variables
 int numFrames=100;
 int highscore=0;
-//allows to create a font
+
+//Allows to create a font
 PFont myFont;
 
 
 void setup()
 {
   size(400, 500);
+  
+  //creating new instances
   snake = new Snake();
   block = new Block();
   killerStar = new KillerStar();
-
+  
   frameRate(10);
 }
 
@@ -101,8 +103,7 @@ void Movement()
     snake.yposition.add(Y);
     
     snake.counter=0;
-  }
-  
+  } 
 }
 
   
@@ -142,27 +143,27 @@ void FaceDisplay()
 
 void killerStarDisplay()
 {
-    for (int i = 1 ; i <= (killerStar.edges * 2) ; i ++)
+  for (int i = 1 ; i <= (killerStar.edges * 2) ; i ++)
+  {
+    float theta = i * killerStar.thetaInc;
+    float x, y;
+    float rad;
+    if (i % 2 == 1)
     {
-      float theta = i * killerStar.thetaInc;
-      float x, y;
-      float rad;
-      if (i % 2 == 1)
-      {
-        rad = killerStar.radius * 0.5f;
-      }
-      else
-      {
-        rad = killerStar.radius;        
-      }
-
-      x = killerStar.position.x + sin(theta) * rad;
-      y = killerStar.position.y -cos(theta) * rad;
-      stroke(random(0, 255), random(0, 255), random(0, 255));
-      line(killerStar.lastX, killerStar.lastY, x, y);
-      killerStar.lastX = x;
-      killerStar.lastY = y;      
+      rad = killerStar.radius * 0.5f;
     }
+    else
+    {
+      rad = killerStar.radius;        
+    }
+
+    x = killerStar.position.x + sin(theta) * rad;
+    y = killerStar.position.y -cos(theta) * rad;
+    stroke(random(0, 255), random(0, 255), random(0, 255));
+    line(killerStar.lastX, killerStar.lastY, x, y);
+    killerStar.lastX = x;
+    killerStar.lastY = y;      
+  }
 }
 
 
@@ -176,18 +177,18 @@ void ExtraBlock()
   //this changes the colour of the snake once the snake has ten blocks
   if(snake.counter%10==0)
   {
-      for(int i=0; i<snake.Snakelength; i++)
-      {
-        stroke(155, 225, 10);
-        fill(255, 125, 0);  
-        ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-        fill(55, 25, 50);
-        rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-        fill(155, 225, 100);
-        ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
-      }
-      frameRate(10+(snake.counter/2));
-   }
+    for(int i=0; i<snake.Snakelength; i++)
+    {
+      stroke(155, 225, 10);
+      fill(255, 125, 0);  
+      ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+      fill(55, 25, 50);
+      rect(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+      fill(155, 225, 100);
+      ellipse(snake.xposition.get(i), snake.yposition.get(i), snake.sidelength, snake.sidelength);
+    }
+    frameRate(10+(snake.counter/2));
+  }
 }
 
 
@@ -267,17 +268,12 @@ void draw()
   {
     highscore=snake.counter;
   }
-  else 
-  {  //end game if less than zero
+
   
-    highscore=0;
-  }
-  
- if(highscore<0)
+  if(snake.counter<0)
   {
     DrawGameOver();
-  }
-    
+  }  
 }
 
 
@@ -294,11 +290,16 @@ boolean HitTail()
   return false; 
 }
 
+
 void DrawGameOver()
 {
-    background(0);
-int radius=50;
-
+  background(0);
+  textAlign(CENTER, CENTER);
+  myFont = createFont("Times New Roman", 70);
+  textFont(myFont);
+  
+  int radius=50;
+  
   //pushMatrix() used to allow translate and rotate to take place
   pushMatrix();
   translate(width/2, height/2);
@@ -311,11 +312,7 @@ int radius=50;
   }
   //popMatrix()used to contain the movements of rotate and translate
   popMatrix();
-
+  
   fill(255, 0, 0);
-  myFont = createFont("Times New Roman", 70);
-  textFont(myFont);
-  textAlign(CENTER, CENTER);
   text("Game Over \n highscore: "+highscore, width/2, height/2);
-
 }
