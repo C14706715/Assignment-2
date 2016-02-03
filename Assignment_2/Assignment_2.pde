@@ -257,7 +257,7 @@ void draw()
   for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
-    if(dist(killerStar.position.x, killerStar.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength)
+    if(dist(killerStar.position.x, killerStar.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
     {
       killerStarRestart();
     }
@@ -269,7 +269,7 @@ void draw()
     highscore=snake.counter;
   }
 
-  if(highscore<0)
+  if(highscore<=0)
   {
     highscore=0;
   }
