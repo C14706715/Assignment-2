@@ -16,6 +16,7 @@ color[] Bcolours={color(25, 125, 255), color(255, 248, 0), color(201, 24, 0), co
 //Global Variables
 int numFrames=100;
 int highscore=0;
+int tempCounter=0;
 
 //Allows to create a font
 PFont myFont;
@@ -173,6 +174,7 @@ void ExtraBlock()
   snake.yposition.add(snake.yposition.get(snake.Snakelength-1)+snake.sidelength);
   snake.Snakelength++;
   snake.counter++;
+  tempCounter=snake.counter;
   
   //this changes the colour of the snake once the snake has ten blocks
   if(snake.counter%10==0)
@@ -266,10 +268,10 @@ void draw()
   //iterates highscore if the  snake is longer than the current high score 
   if(snake.Snakelength > highscore)
   {
-    highscore=snake.counter;
+    highscore=tempCounter;
   }
 
-  if(highscore<=0)
+  if(highscore<0)
   {
     highscore=0;
   }
