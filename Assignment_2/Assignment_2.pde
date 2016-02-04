@@ -311,7 +311,7 @@ void DrawGameOver()
   {
     rotate(2);
     translate(20, 5);
-    fill(0, random(0, 255), random(0, 255));
+    fill(random(0, 255), random(0, 255), random(0, 255));
     ellipse(0, i, radius, radius);
   }
   //popMatrix()used to contain the movements of rotate and translate
