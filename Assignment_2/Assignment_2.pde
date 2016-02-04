@@ -7,6 +7,10 @@
 Snake snake;
 Block block;
 KillerStar killerStar;
+KillerStar killerStar2;
+KillerStar killerStar3;
+KillerStar killerStar4;
+
 
 
 //Arrays
@@ -30,6 +34,9 @@ void setup()
   snake = new Snake();
   block = new Block();
   killerStar = new KillerStar();
+  killerStar2 = new KillerStar();
+  killerStar3 = new KillerStar();
+  killerStar4 = new KillerStar();
   
   frameRate(10);
 }
@@ -166,7 +173,83 @@ void killerStarDisplay()
     killerStar.lastY = y;      
   }
 }
+  
 
+void killerStarDisplay2()
+{
+  for (int i = 1 ; i <= (killerStar2.edges * 2) ; i ++)
+  {
+    float theta = i * killerStar2.thetaInc;
+    float x, y;
+    float rad;
+    if (i % 2 == 1)
+    {
+      rad = killerStar2.radius * 3.5f;
+    }
+    else
+    {
+      rad = killerStar2.radius;        
+    }
+
+    x = killerStar2.position.x + sin(theta) * rad;
+    y = killerStar2.position.y -cos(theta) * rad;
+    stroke(random(0, 255), random(0, 255), random(0, 255));
+    line(killerStar2.lastX, killerStar2.lastY, x, y);
+    killerStar2.lastX = x;
+    killerStar2.lastY = y;      
+  }
+}
+
+void killerStarDisplay3()
+{
+  for (int i = 1 ; i <= (killerStar3.edges * 2) ; i ++)
+  {
+    float theta = i * killerStar3.thetaInc;
+    float x, y;
+    float rad;
+    if (i % 2 == 1)
+    {
+      rad = killerStar3.radius * 3.5f;
+    }
+    else
+    {
+      rad = killerStar3.radius;        
+    }
+
+    x = killerStar3.position.x + sin(theta) * rad;
+    y = killerStar3.position.y -cos(theta) * rad;
+    stroke(random(0, 255), random(0, 255), random(0, 255));
+    line(killerStar3.lastX, killerStar3.lastY, x, y);
+    killerStar3.lastX = x;
+    killerStar3.lastY = y;      
+  }
+}
+
+
+void killerStarDisplay4()
+{
+  for (int i = 1 ; i <= (killerStar4.edges * 2) ; i ++)
+  {
+    float theta = i * killerStar4.thetaInc;
+    float x, y;
+    float rad;
+    if (i % 2 == 1)
+    {
+      rad = killerStar4.radius * 3.5f;
+    }
+    else
+    {
+      rad = killerStar4.radius;        
+    }
+
+    x = killerStar4.position.x + sin(theta) * rad;
+    y = killerStar4.position.y -cos(theta) * rad;
+    stroke(random(0, 255), random(0, 255), random(0, 255));
+    line(killerStar4.lastX, killerStar4.lastY, x, y);
+    killerStar4.lastX = x;
+    killerStar4.lastY = y;      
+  }
+}
 
 void ExtraBlock()
 {
@@ -205,7 +288,13 @@ void BlockRestart()
 void killerStarRestart()
 { 
   killerStar.position.x= random(0, width);
-  killerStar.position.y= random(0, height);  
+  killerStar.position.y= random(0, height); 
+  killerStar2.position.x= random(0, width);
+  killerStar2.position.y= random(0, height);  
+  killerStar3.position.x= random(0, width);
+  killerStar3.position.y= random(0, height);
+  killerStar4.position.x= random(0, width);
+  killerStar4.position.y= random(0, height);
   frameRate((10+(snake.counter/2))+5);
   snake.counter--;
 }
@@ -244,6 +333,55 @@ void draw()
   SnakeDisplay();
   FaceDisplay();
   killerStarDisplay();
+  for(int i=0; i<snake.Snakelength; i++)
+  {
+    //dist() measure the distance between the point(x1, y1, x2, y2)
+    if(dist(killerStar.position.x, killerStar.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
+    {
+      killerStarRestart();
+    }
+  }
+  
+  for(int i=0; i<snake.Snakelength; i++)
+  {
+    if(highscore>2)
+    {
+      killerStarDisplay2();
+    
+      if(dist(killerStar2.position.x, killerStar2.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
+      {
+        killerStarRestart();
+      }
+    }
+  }
+   
+  for(int i=0; i<snake.Snakelength; i++)
+  {
+    if(highscore>4)
+    {
+      killerStarDisplay3();
+    
+      if(dist(killerStar3.position.x, killerStar3.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
+      {
+        killerStarRestart();
+      }
+    }
+  }
+  
+  for(int i=0; i<snake.Snakelength; i++)
+  {
+    if(highscore>8)
+    {
+      killerStarDisplay4();
+  
+      if(dist(killerStar4.position.x, killerStar4.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
+      {
+        killerStarRestart();
+      }
+    }
+  }
+  
+  
   Score();
 
   for(int i=0; i<snake.Snakelength; i++)
@@ -256,14 +394,26 @@ void draw()
     }
   } 
   
-  for(int i=0; i<snake.Snakelength; i++)
+ /* for(int i=0; i<snake.Snakelength; i++)
   {
     //dist() measure the distance between the point(x1, y1, x2, y2)
     if(dist(killerStar.position.x, killerStar.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
     {
       killerStarRestart();
     }
-  } 
+    if(dist(killerStar2.position.x, killerStar2.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
+    {
+      killerStarRestart();
+    }
+    if(dist(killerStar3.position.x, killerStar3.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
+    {
+      killerStarRestart();
+    }
+    if(dist(killerStar4.position.x, killerStar4.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
+    {
+      killerStarRestart();
+    }
+  }*/ 
   
   //iterates highscore if the  snake is longer than the current high score 
   if(snake.Snakelength > highscore)
@@ -274,7 +424,7 @@ void draw()
   if(highscore<0)
   {
     highscore=0;
-  }
+  } 
   
   if(snake.counter<0)
   {
