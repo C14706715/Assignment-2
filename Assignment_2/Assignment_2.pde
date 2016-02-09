@@ -157,6 +157,7 @@ void killerStarDisplay()
     float x, y;
     float rad;
     
+    //This makes the lines on each star thicker
     strokeWeight(10);    
     if (i % 2 == 1)
     {
@@ -174,6 +175,7 @@ void killerStarDisplay()
     killerStar.lastX = x;
     killerStar.lastY = y;      
   }
+  //This prevents the stroke weight of every other shape from changing
   strokeWeight(0);
 }
   
