@@ -374,8 +374,6 @@ void draw()
   {
     if(highscore>4)
     {
-      //plays the sound file declared in setup()
-      sound.play();
       killerStarDisplay3();
     
       if(dist(killerStar3.position.x, killerStar3.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
@@ -386,9 +384,11 @@ void draw()
   }
   
   for(int i=0; i<snake.Snakelength; i++)
-  {
+  {1
     if(highscore>8)
     {
+      //plays the sound file declared in setup()
+      sound.play();
       killerStarDisplay4();
   
       if(dist(killerStar4.position.x, killerStar4.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
