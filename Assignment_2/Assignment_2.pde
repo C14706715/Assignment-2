@@ -301,6 +301,16 @@ void BlockRestart()
 {
   block.position.x= random(100, width-100);
   block.position.y= random(100, height-100);
+  
+  killerStar.position.x= random(0, width);
+  killerStar.position.y= random(0, height); 
+  killerStar2.position.x= random(0, width);
+  killerStar2.position.y= random(0, height);  
+  killerStar3.position.x= random(0, width);
+  killerStar3.position.y= random(0, height);
+  killerStar4.position.x= random(0, width);
+  killerStar4.position.y= random(0, height);
+ 
   frameRate(10);
 }
 
@@ -315,6 +325,7 @@ void killerStarRestart()
   killerStar3.position.y= random(0, height);
   killerStar4.position.x= random(0, width);
   killerStar4.position.y= random(0, height);
+  
   frameRate((10+(snake.counter/2))+5);
   snake.counter--;
 }
@@ -379,6 +390,9 @@ void draw()
   {
     if(highscore>4)
     {
+      //plays the sound file declared in setup()
+      sound.play();
+      
       killerStarDisplay3();
     
       if(dist(killerStar3.position.x, killerStar3.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
