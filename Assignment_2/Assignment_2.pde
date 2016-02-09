@@ -2,6 +2,7 @@
 //Assignment 2
 //Rollercoaster game (snake game inspired)
 
+import ddf.minim.*;
 
 //Classes
 Snake snake;
@@ -10,6 +11,8 @@ KillerStar killerStar;
 KillerStar killerStar2;
 KillerStar killerStar3;
 KillerStar killerStar4;
+AudioPlayer sound;
+Minim music; //Audio
 
 
 
@@ -37,7 +40,8 @@ void setup()
   killerStar2 = new KillerStar();
   killerStar3 = new KillerStar();
   killerStar4 = new KillerStar();
-  
+  music = new Minim(this);
+  sound = music.loadFile("clap.mp3", 500);
   frameRate(10);
 }
 
@@ -370,6 +374,8 @@ void draw()
   {
     if(highscore>4)
     {
+      //plays the sound file declared in setup()
+      sound.play();
       killerStarDisplay3();
     
       if(dist(killerStar3.position.x, killerStar3.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
