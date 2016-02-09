@@ -384,7 +384,7 @@ void draw()
   }
   
   for(int i=0; i<snake.Snakelength; i++)
-  {1
+  {
     if(highscore>8)
     {
       //plays the sound file declared in setup()
