@@ -156,6 +156,8 @@ void killerStarDisplay()
     float theta = i * killerStar.thetaInc;
     float x, y;
     float rad;
+    
+    strokeWeight(10);    
     if (i % 2 == 1)
     {
       rad = killerStar.radius * 3.5f;
@@ -172,6 +174,7 @@ void killerStarDisplay()
     killerStar.lastX = x;
     killerStar.lastY = y;      
   }
+  strokeWeight(0);
 }
   
 
@@ -182,6 +185,7 @@ void killerStarDisplay2()
     float theta = i * killerStar2.thetaInc;
     float x, y;
     float rad;
+    strokeWeight(10); 
     if (i % 2 == 1)
     {
       rad = killerStar2.radius * 3.5f;
@@ -198,10 +202,12 @@ void killerStarDisplay2()
     killerStar2.lastX = x;
     killerStar2.lastY = y;      
   }
+  strokeWeight(0); 
 }
 
 void killerStarDisplay3()
 {
+  strokeWeight(10); 
   for (int i = 1 ; i <= (killerStar3.edges * 2) ; i ++)
   {
     float theta = i * killerStar3.thetaInc;
@@ -223,11 +229,13 @@ void killerStarDisplay3()
     killerStar3.lastX = x;
     killerStar3.lastY = y;      
   }
+  strokeWeight(0); 
 }
 
 
 void killerStarDisplay4()
 {
+  strokeWeight(10); 
   for (int i = 1 ; i <= (killerStar4.edges * 2) ; i ++)
   {
     float theta = i * killerStar4.thetaInc;
@@ -249,6 +257,7 @@ void killerStarDisplay4()
     killerStar4.lastX = x;
     killerStar4.lastY = y;      
   }
+  strokeWeight(0); 
 }
 
 void ExtraBlock()
@@ -470,5 +479,5 @@ void DrawGameOver()
   popMatrix();
   
   fill(255, 0, 0);
-  text("Game Over \n highscore: "+highscore, width/2, height/2);
+  text("Game Over \n Highscore: "+highscore, width/2, height/2);
 }
