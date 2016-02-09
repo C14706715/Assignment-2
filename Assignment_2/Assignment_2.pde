@@ -1,7 +1,8 @@
-//Jake Young
+//Jake Young-C14706715
 //Assignment 2
 //Rollercoaster game (snake game inspired)
 
+//Importing music library
 import ddf.minim.*;
 
 //Classes
@@ -14,7 +15,6 @@ KillerStar killerStar4;
 AudioPlayer sound;
 AudioPlayer death;
 Minim music; //Audio
-
 
 
 //Arrays
@@ -42,6 +42,7 @@ void setup()
   killerStar3 = new KillerStar();
   killerStar4 = new KillerStar();
   music = new Minim(this);
+  //loadFile allow to load a saved sound file
   sound = music.loadFile("clap.mp3", 500);
   death = music.loadFile("death.mp3", 500);
   frameRate(10);
@@ -213,6 +214,7 @@ void killerStarDisplay2()
   strokeWeight(0); 
 }
 
+
 void killerStarDisplay3()
 {
   strokeWeight(10); 
@@ -267,6 +269,7 @@ void killerStarDisplay4()
   }
   strokeWeight(0); 
 }
+
 
 void ExtraBlock()
 {
@@ -399,8 +402,6 @@ void draw()
       }
     }
   }
-  
-  
   Score();
 
   for(int i=0; i<snake.Snakelength; i++)
@@ -458,6 +459,7 @@ void DrawGameOver()
   //pushMatrix() used to allow translate and rotate to take place
   pushMatrix();
   translate(width/2, height/2);
+  
   for(float i=0; i<10000; i++)
   {
     rotate(2);
