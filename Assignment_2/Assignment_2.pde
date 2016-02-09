@@ -12,6 +12,7 @@ KillerStar killerStar2;
 KillerStar killerStar3;
 KillerStar killerStar4;
 AudioPlayer sound;
+AudioPlayer death;
 Minim music; //Audio
 
 
@@ -42,6 +43,7 @@ void setup()
   killerStar4 = new KillerStar();
   music = new Minim(this);
   sound = music.loadFile("clap.mp3", 500);
+  death = music.loadFile("death.mp3", 500);
   frameRate(10);
 }
 
@@ -385,7 +387,7 @@ void draw()
   
   for(int i=0; i<snake.Snakelength; i++)
   {
-    if(highscore>8)
+    if(highscore>9)
     {
       //plays the sound file declared in setup()
       sound.play();
@@ -411,27 +413,6 @@ void draw()
     }
   } 
   
- /* for(int i=0; i<snake.Snakelength; i++)
-  {
-    //dist() measure the distance between the point(x1, y1, x2, y2)
-    if(dist(killerStar.position.x, killerStar.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
-    {
-      killerStarRestart();
-    }
-    if(dist(killerStar2.position.x, killerStar2.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
-    {
-      killerStarRestart();
-    }
-    if(dist(killerStar3.position.x, killerStar3.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
-    {
-      killerStarRestart();
-    }
-    if(dist(killerStar4.position.x, killerStar4.position.y, snake.xposition.get(i), snake.yposition.get(i))<snake.sidelength*2)
-    {
-      killerStarRestart();
-    }
-  }*/ 
-  
   //iterates highscore if the  snake is longer than the current high score 
   if(snake.Snakelength > highscore)
   {
@@ -446,6 +427,7 @@ void draw()
   if(snake.counter<0)
   {
     DrawGameOver();
+    death.play();
   }  
 }
 
